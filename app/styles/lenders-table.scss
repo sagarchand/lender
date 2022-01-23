@@ -1,0 +1,46 @@
+.table-body-wrapper {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+.lenders-table {
+    .no-top-border {
+        th {
+            border-top: 0;
+            top: 35px;
+            border-bottom: 1px solid gray;
+        }
+    }
+    th {
+        color: #646464;
+        position: sticky;
+        top: 0;
+        background: #fff;
+        box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    }
+    th,td {
+        &.text-center {
+            text-align: center;
+        }
+        &.capitalize {
+            text-transform: capitalize;
+        }
+    }
+    td {
+        padding: 18px 13px;
+        border-top: 0;
+        vertical-align: middle;
+    }
+    .bank-code {
+        font-weight: bold;
+        color: #646464;
+    }
+    input[type='checkbox'] {
+        width: 16px;
+        height: 16px;
+        margin-top: -5px;
+    }
+}
+
+.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
+    background-color: #e1e1e1;
+}
