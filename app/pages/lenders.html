@@ -1,0 +1,9 @@
+<div ng-if="loadingData" class="text-center">
+    Loading data ... <span class="icon icon-spinner icon-spin"></span>
+</div>
+
+<div ng-if="!loadingData && lendersData" class="well">
+    <h3>Lender Maintenance</h3>
+    <hr>
+    <div ui-grid="lendersDataTable" class="myGrid"></div>
+</div>

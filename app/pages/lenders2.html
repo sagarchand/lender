@@ -1,0 +1,100 @@
+<div ng-if="loadingData" class="text-center">
+    Loading data ... <span class="icon icon-spinner icon-spin"></span>
+</div>
+
+<div ng-if="!loadingData && lendersData" class="well">
+    <h3>Lender Maintenance</h3>
+    <hr>
+    <div class="sticky-helper">
+
+    </div>
+    <table class="table table-striped lenders-table sticky-header">
+        <thead>
+            <tr>
+              <th>Bank Code</th>
+              <th>Display Name</th>
+              <th>Type</th>
+              <th colspan="3"  class="no-btm-border text-center">
+                  Commission
+              </th>
+              <th>Balance Multiplier</th>
+              <th>Active</th>
+              <th>Hide</th>
+              <th>Edit</th>
+            </tr>
+            <tr class="no-top-border">
+                <th width="6%"></th>
+                <th width="22%"></th>
+                <th width="10%"></th>
+                <th width="10%" class="text-center">
+                    Upfront
+                </th>
+                <th width="10%" class="text-center">
+                    Trail High
+                </th>
+                <th width="10%" class="text-center">
+                    Trail Low
+                </th>
+                <th width="10%"></th>
+                <th width="5%"></th>
+                <th width="5%"></th>
+                <th width="10%"></th>
+            </tr>
+          </thead>
+    </table>
+    <div class="table-body-wrapper">
+        <table class="table table-striped lenders-table sticky-header">
+            <tbody>
+              <tr ng-repeat="entry in lendersData">
+                <td class="bank-code"  width="6%">
+                    {{entry.attributes.code}}
+                </td>
+                <td  width="22%">
+                  {{entry.attributes.name}}
+                </td>
+                <td width="10%" class="capitalize">
+                  {{entry.attributes.type}}
+                </td>
+                <td width="10%" class="text-center">
+                  %{{entry.attributes.upfont_commission}}
+                </td>
+                <td  width="10%"class="text-center">
+                  %{{entry.attributes.high_trail_commission}}
+                </td>
+                <td width="10%" class="text-center">
+                  %{{entry.attributes.low_trail_commission}}
+                </td>
+                <td width="10%" class="text-center">
+                  {{entry.attributes.balance_multiplier}}
+                </td>
+                <td width="5%">
+                  <input type="checkbox" ng-disabled="!entry.isEditing" ng-model="entry.attributes.is_active">
+                  
+                </td>
+                <td width="5%">
+                  <input type="checkbox" ng-disabled="!entry.isEditing" checked ng-if="entry.attributes.is_hidden">
+                  <input type="checkbox" ng-disabled="!entry.isEditing" ng-if="!entry.attributes.is_hidden">
+                </td>
+                <td width="10%">
+                  <a ng-click="editRow(entry)" ng-if="!entry.isEditing">
+                      <span class="icon icon-pencil"></span> Edit
+                  </a>
+                  <a ng-click="saveData(entry)" ng-if="entry.isEditing && !entry.saving">
+                      <span class="icon icon-save"></span> Save &nbsp;
+                  </a>
+                  <a ng-click="cancelEditRow(entry, entryOldData)" ng-if="entry.isEditing && !entry.saving">
+                      &nbsp;<span class="icon icon-remove"></span> Cancel
+                  </a>
+                  <span class="icon icon-spinner icon-spin" ng-if="entry.saving"></span>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+<div ng-if="lendersDataError" class="well text-center">
+    <p class="text-error">Error fetching data from server!</p>
+    <p><button class="btn btn-primary" type="button" ng-click="tryLendersDataAgain()">Try again</button></p>
+</div>
